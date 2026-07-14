@@ -19,11 +19,11 @@ export default {
           900: '#06162c',
           950: '#030c18',
         },
-        // Azul marinho escuro da logo (corpo do edifício)
+        // Cinza-chumbo neutro com leve toque de azul (modo escuro)
         dark: {
-          900: '#0c1a27',
-          800: '#112232',
-          700: '#1a3145',
+          900: '#12161c',
+          800: '#1a1f27',
+          700: '#242b35',
         },
       },
       fontFamily: {

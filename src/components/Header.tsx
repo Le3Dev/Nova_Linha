@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTheme } from '../context/ThemeContext'
-import { logo } from '../data/images'
+import { logoSymbol } from '../data/images'
 
 const navLinks = [
   { label: 'Início', href: '#hero' },
@@ -37,24 +37,13 @@ export default function Header() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
 
-        {/* ── Logo ──
-            Sobre fundo escuro (hero ou dark mode) a logo PNG tem fundo branco,
-            então envolvemos em uma pílula branca/translúcida para mantê-la visível.
-            Quando scrollado no modo claro ela já tem contraste natural. */}
-        <a href="#hero" aria-label="Nova Linha">
-          <span
-            className={`flex items-center transition-all duration-300 ${
-              !scrolled || theme === 'dark'
-                ? 'bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 shadow-sm'
-                : ''
-            }`}
-          >
-            <img
-              src={logo}
-              alt="Nova Linha"
-              className="h-8 sm:h-10 w-auto object-contain"
-            />
-          </span>
+        {/* Logo — apenas o símbolo, recortado com fundo transparente */}
+        <a href="#hero" aria-label="Nova Linha" className="flex items-center">
+          <img
+            src={logoSymbol}
+            alt="Nova Linha"
+            className="h-9 sm:h-11 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop nav */}
