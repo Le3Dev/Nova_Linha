@@ -5,30 +5,50 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Paleta extraída da logo Nova Linha (azul marinho + aço)
+        // Azul-petróleo extraído das faces do símbolo da logo Nova Linha
         brand: {
-          50:  '#f0f5fb',
-          100: '#dce8f5',
-          200: '#b4d0eb',
-          300: '#7aaada',
-          400: '#4281c4',
-          500: '#1a5faa',   // tom médio — botões, destaques
-          600: '#144a87',
-          700: '#0f3765',
-          800: '#0a2547',
-          900: '#06162c',
-          950: '#030c18',
+          50:  '#f1f5f6',
+          100: '#dfe8eb',
+          200: '#c0d2d8',
+          300: '#92afb9',
+          400: '#648792',
+          500: '#4a6670',   // face clara do símbolo
+          600: '#2f5262',
+          700: '#1b3e4c',   // face média do símbolo
+          800: '#12303c',
+          900: '#0b2029',
+          950: '#04131b',   // sombra do símbolo
         },
-        // Cinza-chumbo neutro com leve toque de azul (modo escuro)
+        // Acento areia/champanhe — usado com moderação para valorizar
+        sand: {
+          100: '#f4ece0',
+          200: '#e8d9c1',
+          300: '#dcc4a0',
+          400: '#cdab7e',
+          500: '#b8935f',
+          600: '#97764a',
+        },
+        paper: '#f6f4ef',
+        // Superfícies do modo escuro (petróleo quase neutro)
         dark: {
-          900: '#12161c',
-          800: '#1a1f27',
-          700: '#242b35',
+          900: '#081419',
+          800: '#0f1e25',
+          700: '#182b33',
         },
       },
       fontFamily: {
         sans:    ['Montserrat', 'system-ui', 'sans-serif'],
         display: ['Montserrat', 'system-ui', 'sans-serif'],
+        serif:   ['"Cormorant Garamond"', 'Georgia', 'serif'],
+      },
+      keyframes: {
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to:   { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        marquee: 'marquee 40s linear infinite',
       },
     },
   },

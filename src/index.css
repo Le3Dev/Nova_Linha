@@ -9,13 +9,49 @@
   }
 
   body {
-    @apply bg-white dark:bg-dark-900 text-gray-900 dark:text-white antialiased transition-colors duration-300;
+    @apply bg-paper dark:bg-dark-900 text-brand-950 dark:text-white antialiased transition-colors duration-300;
     font-family: 'Montserrat', system-ui, sans-serif;
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Montserrat', system-ui, sans-serif;
     letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    @apply bg-sand-300 text-brand-950;
+  }
+}
+
+@layer components {
+  /* Rótulo de seção: linha fina + texto espaçado, eco do "linha" da marca */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-[11px] font-semibold tracking-[0.3em] uppercase;
+  }
+  .eyebrow::before {
+    content: '';
+    @apply block w-8 h-px bg-current opacity-70;
+  }
+
+  .accent {
+    @apply font-serif italic font-normal tracking-normal;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300;
+  }
+  .btn-sand {
+    @apply btn bg-sand-400 hover:bg-sand-300 text-brand-950 shadow-lg shadow-sand-600/20;
+  }
+  .btn-petrol {
+    @apply btn bg-brand-700 hover:bg-brand-600 text-white;
+  }
+  .btn-ghost {
+    @apply btn border border-white/30 hover:border-white/70 hover:bg-white/5 text-white;
+  }
+
+  .field {
+    @apply w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-white/30 text-sm focus:outline-none focus:border-sand-400 transition-colors;
   }
 }
 
@@ -27,4 +63,9 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-marquee { animation: none; }
 }

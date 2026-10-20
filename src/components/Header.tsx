@@ -5,11 +5,24 @@ import { useTheme } from '../context/ThemeContext'
 import { logoSymbol } from '../data/images'
 
 const navLinks = [
-  { label: 'Início', href: '#hero' },
   { label: 'Imóveis', href: '#properties' },
-  { label: 'Sobre', href: '#about' },
-  { label: 'Contato', href: '#contact' },
+  { label: 'Regiões', href: '#regions' },
+  { label: 'A Nova Linha', href: '#about' },
 ]
+
+export function Wordmark({ light }: { light: boolean }) {
+  return (
+    <span className="flex items-center gap-2.5">
+      <img src={logoSymbol} alt="" className="h-9 sm:h-10 w-auto object-contain" />
+      <span className={`leading-none ${light ? 'text-white' : 'text-brand-950 dark:text-white'}`}>
+        <span className="block text-[15px] sm:text-base font-light tracking-[0.32em]">NOVA LINHA</span>
+        <span className={`block text-[8.5px] tracking-[0.28em] mt-1 ${light ? 'text-white/60' : 'text-brand-500 dark:text-white/50'}`}>
+          CONSTRUÇÃO CIVIL
+        </span>
+      </span>
+    </span>
+  )
+}
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -18,116 +31,90 @@ export default function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
-    window.addEventListener('scroll', onScroll)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const linkClass =
-    scrolled && theme === 'light'
-      ? 'text-gray-700 hover:text-brand-600'
-      : 'text-white/85 hover:text-white'
+  // Sobre o hero (escuro) o texto é sempre claro
+  const light = !scrolled || theme === 'dark'
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 inset-x-0 z-40 transition-all duration-500 ${
         scrolled
-          ? 'bg-white/96 dark:bg-dark-900/96 backdrop-blur-md shadow-md py-2'
-          : 'bg-transparent py-4'
+          ? 'bg-paper/85 dark:bg-dark-900/85 backdrop-blur-xl border-b border-brand-950/5 dark:border-white/5 py-2.5'
+          : 'bg-transparent py-5'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
-
-        {/* Logo — apenas o símbolo, recortado com fundo transparente */}
-        <a href="#hero" aria-label="Nova Linha" className="flex items-center">
-          <img
-            src={logoSymbol}
-            alt="Nova Linha"
-            className="h-9 sm:h-11 w-auto object-contain"
-          />
+        <a href="#hero" aria-label="Nova Linha — início">
+          <Wordmark light={light} />
         </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden md:flex items-center gap-7">
+        <nav className="hidden lg:flex items-center gap-8">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-semibold tracking-wide transition-colors ${linkClass}`}
+              className={`relative text-[13px] font-medium tracking-wide transition-colors after:absolute after:left-0 after:-bottom-1.5 after:h-px after:w-0 after:bg-sand-400 after:transition-all hover:after:w-full ${
+                light ? 'text-white/80 hover:text-white' : 'text-brand-800 hover:text-brand-950'
+              }`}
             >
               {link.label}
             </a>
           ))}
-
-          <button
-            onClick={toggle}
-            aria-label="Alternar tema"
-            className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-              scrolled && theme === 'light'
-                ? 'bg-gray-100 hover:bg-gray-200 text-gray-600'
-                : 'bg-white/15 hover:bg-white/25 text-white'
-            }`}
-          >
-            {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
-          </button>
-
-          <a
-            href="#contact"
-            className="px-5 py-2.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold tracking-wide transition-colors shadow-md"
-          >
-            Fale Conosco
-          </a>
         </nav>
 
-        {/* Mobile */}
-        <div className="md:hidden flex items-center gap-2">
+        <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={toggle}
             aria-label="Alternar tema"
             className={`w-9 h-9 rounded-full flex items-center justify-center transition-colors ${
-              scrolled && theme === 'light'
-                ? 'bg-gray-100 text-gray-600'
-                : 'bg-white/15 text-white'
+              light ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-brand-950/5 hover:bg-brand-950/10 text-brand-800'
             }`}
           >
             {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />}
           </button>
+
+          <a href="#contact" className="hidden sm:inline-flex btn-sand !py-2.5 !px-5 !text-[13px]">
+            Agendar visita
+          </a>
+
           <button
-            className={scrolled && theme === 'light' ? 'text-gray-800' : 'text-white'}
+            className={`lg:hidden w-9 h-9 flex items-center justify-center ${light ? 'text-white' : 'text-brand-900'}`}
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
+            aria-expanded={menuOpen}
           >
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
       </div>
 
-      {/* Mobile drawer */}
       <AnimatePresence>
         {menuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.22 }}
-            className="md:hidden bg-white dark:bg-dark-900 border-t border-gray-200 dark:border-white/10 overflow-hidden"
+            transition={{ duration: 0.25 }}
+            className="lg:hidden mt-2 bg-brand-950/95 backdrop-blur-xl overflow-hidden"
           >
-            <div className="px-5 py-4 flex flex-col gap-1">
-              {navLinks.map((link) => (
+            <div className="px-6 py-6 flex flex-col">
+              {navLinks.map((link, i) => (
                 <a
                   key={link.href}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-gray-700 dark:text-white/80 hover:text-brand-600 dark:hover:text-brand-400 text-sm font-semibold py-3 border-b border-gray-100 dark:border-white/5 last:border-0 transition-colors"
+                  className="flex items-baseline gap-4 py-3.5 border-b border-white/5 text-white text-lg font-light"
                 >
+                  <span className="text-sand-400 text-[11px] font-semibold">0{i + 1}</span>
                   {link.label}
                 </a>
               ))}
-              <a
-                href="#contact"
-                onClick={() => setMenuOpen(false)}
-                className="mt-3 py-3 rounded-lg bg-brand-500 hover:bg-brand-600 text-white text-sm font-bold text-center transition-colors"
-              >
-                Fale Conosco
+              <a href="#contact" onClick={() => setMenuOpen(false)} className="btn-sand mt-6">
+                Agendar visita
               </a>
             </div>
           </motion.div>

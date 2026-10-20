@@ -1,21 +1,22 @@
 // Local property images — imported so Vite processes and hashes them for production
+// Fotos convertidas para WebP (máx. 2000px) — os JPGs originais ficam em src/image como backup
 
 // Alípio Siqueira
-import lipio1 from '../image/lipio.jpg'
-import lipio2 from '../image/lipio (2).jpg'
-import lipio3 from '../image/lipio3.jpg'
-import lipio4 from '../image/lipio4.jpg'
+import lipio1 from '../image/lipio.webp'
+import lipio2 from '../image/lipio_2.webp'
+import lipio3 from '../image/lipio3.webp'
+import lipio4 from '../image/lipio4.webp'
 
 // Leonides Pommer — Itapoá
-import itapoa from '../image/Itapoa8andares.jpeg'
-import praia4 from '../image/praia4.jpg'
-import praia6 from '../image/praia6.jpg'
+import itapoa from '../image/Itapoa8andares.webp'
+import praia4 from '../image/praia4.webp'
+import praia6 from '../image/praia6.webp'
 
 // Guilherme Witt
-import guilherme1 from '../image/guilherme1.jpg'
-import guilherme2 from '../image/guilherme2.jpg'
-import guilherme3 from '../image/guilherme3.jpg'
-import guilher6 from '../image/guilher6.jpg'
+import guilherme1 from '../image/guilherme1.webp'
+import guilherme2 from '../image/guilherme2.webp'
+import guilherme3 from '../image/guilherme3.webp'
+import guilher6 from '../image/guilher6.webp'
 
 // Apartamento Centro — Mafra (Av. Prefeitura Frederico Heyse, 241)
 import mafra01 from '../image/mafra/mafra01.webp'
